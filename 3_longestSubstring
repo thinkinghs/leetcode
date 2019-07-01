@@ -4,7 +4,29 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s:str) -> int:
+        # dictionary 공부하고 solution 참고해서 내가 만든 코드. 거의 비슷함
+        # hash_table: key - alphabet, value - index
+        # 1. 새로 추가되는 alphabet이 hash table에 있는지 확인
+        # 2. 해당 alphabet이 hash table에 있으면, 위치가 현재 list의 시작 위치(start) 뒤에 있는지 체크
+        # 3. 만약 start보다 뒤에 있거나 같은 곳에 위치해 있으면 현재 list(curr)에 새로운 alphabet이 위치해 있다는 뜻이므로 중복값 만난 것
+        # 기존 max length와 새로 수집한 curr의 lenght를 비교해서 더 큰 값을 max lenght로 할당, 그리고 시작점을 중복되는 알파벳 위치 다음부터로 변경
+        # 현재 list(curr)의 길이는 현재 iteration되는 위치(idx) 에서 중복 알파벳 위치를 빼면 됨.
+        # (또는 현재 idx - 변경된 start + 1, a부터 b까지의 수량을 구할 때는 a-b+1 이므로)
+        # 새로운 alphabet 값을 hash table에 위치 기록
+        # 맨 마지막에 return할 때 max 함수로 현재 curr 길이와 max 길이 비교해서 더 큰 값을 넘김
+        dct = {}
+        max_so_far = curr_max = start = 0
+        for index, i in enumerate(s):
+            if i in dct and dct[i] >= start:
+                max_so_far = max(max_so_far, curr_max)
+                curr_max = index - dct[i]
+                start = dct[i] + 1
+            else:
+                curr_max += 1
+            dct[i] = index
+        return max(max_so_far, curr_max)
         
+'''
         #brute force O(n^3). My answer. Straightful but slow
         longestCnt = 0
         newList = list()
@@ -22,30 +44,5 @@ class Solution:
             if len(s[idx:]) < longestCnt:
                 break
         return longestCnt
-        '''
-        for i in s:
-            if i in newList:
-                longestCnt = len(newList) if len(newList) > longestCnt else longestCnt
-                newList = list(i)
-            else:
-                newList.append(i)
-            print(newList)
-            
-        longestCnt = len(newList) if len(newList) > longestCnt else longestCnt
-        return longestCnt
-        '''
         
-        '''
-    def lengthOfLongestSubstring(self, s):
-        dct = {}
-        max_so_far = curr_max = start = 0
-        for index, i in enumerate(s):
-            if i in dct and dct[i] >= start:
-                max_so_far = max(max_so_far, curr_max)
-                curr_max = index - dct[i]
-                start = dct[i] + 1
-            else:
-                curr_max += 1
-            dct[i] = index
-        return max(max_so_far, curr_max)
-        '''
+'''

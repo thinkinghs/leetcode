@@ -1,0 +1,28 @@
+# https://leetcode.com/problems/longest-common-prefix/ㅎ
+class Solution:
+    def longestCommonPrefix(self, strs) -> str:
+        
+        prefix = ''
+        
+        # strs가 none이면 prefix를 그냥 그대로 돌려주기
+        if not strs:
+            return prefix
+        
+        for j in range(len(min(strs))):
+            temp = list()
+            for i in range(len(strs)):
+                temp.append(strs[i][j])
+
+            if len(set(temp)) == 1:
+                prefix += temp[0]
+            else:
+                break
+            
+        return prefix
+
+s = Solution()
+strs = ["flower","flow","flight"]
+s.longestCommonPrefix(strs)
+
+# 아래 코드 동작하는지 확인
+len(min(["abca","abc"]))

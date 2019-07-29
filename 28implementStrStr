@@ -1,0 +1,10 @@
+# https://leetcode.com/problems/implement-strstr/submissions/
+# It's very easy
+
+
+class Solution:
+    def strStr(self, haystack, needle):
+        if needle in haystack:
+            return haystack.index(needle)
+        else:
+            return -1

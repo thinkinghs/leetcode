@@ -1,0 +1,9 @@
+# https://leetcode.com/problems/add-binary/
+# easy
+
+class Solution:
+    def addBinary(self, a:str, b:str) -> str:
+        
+        # The int() function converts the given string into an integer number considering the provided base value
+        # 2진법 str으로 a와 b input -> int() 이용해서 10진법으로 변경 후 sum 계산 -> 10진법 값을 bin() 이용해서 2진법 변경
+        return bin(int(a,2) + int(b,2))[2:]

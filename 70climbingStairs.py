@@ -24,3 +24,20 @@ class Solution:
             ways += self.NChooseK_fast(n-i,i)
     
         return ways
+
+# solution에 memoization 풀이법 참고
+# memo 값을 기억해 둠에 따라, 모든 경우에 recursion 할 필요 없고 memo[i] 값을 알면 바로 값을 return 받아서 사용함
+class memoizationSolution:
+    def climbStairs(self, n):
+        memo = [0] * (n+1)
+        return self.climbStairsRecursion(0, n, memo)
+    
+    def climbStairsRecursion(self, i, n, memo):
+        if i > n:
+            return 0
+        if i == n:
+            return 1
+        if memo[i] > 0 :
+            return memo[i]
+        memo[i] = self.climbStairsRecursion(i+1, n, memo) + self.climbStairsRecursion(i+2, n, memo)
+        return memo[i]

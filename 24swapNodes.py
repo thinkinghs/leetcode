@@ -45,6 +45,18 @@ class Solution:
         
         return headPointer
 
+ # https://leetcode.com/problems/swap-nodes-in-pairs/discuss/11019/7-8-lines-C%2B%2B-Python-Ruby
+class bestSolution:
+    def swapPairs(self, head):
+        dummy = pre = ListNode(0)
+        pre.next = head
+        while pre.next and pre.next.next:
+            a = pre.next
+            b = a.next
+            pre.next, b.next, a.next = b, a, b.next
+            pre = a
+        return dummy.next
+    
 head = ListNode(1)
 head.next = ListNode(2)
 head.next.next = ListNode(3)

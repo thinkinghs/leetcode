@@ -24,3 +24,26 @@ class Solution:
                 curr = curr.next
         
         return head
+
+    
+# if a given list is not sorted, a below would be neccessary
+class Solution:
+    def deleteDuplicates(self, head: ListNode) -> ListNode:
+        if not head:
+            return head
+        
+        duplicated = dict()
+        l = head
+        result = ListNode(0)
+        result_head = result
+
+        while l != None:
+            if l.val in duplicated:
+                pass
+            else:
+                duplicated[l.val] = 1
+                result.next = ListNode(l.val)
+                result = result.next  
+            l = l.next
+            
+        return result_head.next
